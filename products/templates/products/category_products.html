@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ category.name }}</h1>
+
+{% for product in products %}
+
+    <h2>
+        <a href="{% url 'product_detail' product.id %}">
+            {{ product.name }}
+        </a>
+    </h2>
+
+    <p>قیمت: {{ product.price }}</p>
+
+    <p>{{ product.description }}</p>
+
+{% empty %}
+
+    <p>محصولی در این دسته‌بندی وجود ندارد.</p>
+
+{% endfor %}
+
+<br>
+
+<a href="{% url 'product_list' %}">
+    بازگشت به همه محصولات
+</a>
+
+{% endblock %}

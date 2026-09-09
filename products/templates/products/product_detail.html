@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if product.image %}
+
+    <img
+        src="{{ product.image.url }}"
+        alt="{{ product.name }}"
+        width="300"
+        height="300"
+    >
+
+{% else %}
+
+    <img
+        src="{% static 'images/photo29601563916.jpg' %}"
+        alt="تصویر پیش‌فرض"
+        width="300"
+        height="300"
+    >
+
+{% endif %}
+
+<h1>{{ product.name }}</h1>
+
+<p>قیمت: {{ product.price }}</p>
+
+<p>دسته‌بندی: {{ product.category.name }}</p>
+
+<p>{{ product.description }}</p>
+
+<a href="{% url 'add_to_cart' product.id %}">
+    افزودن به سبد خرید
+</a>
+
+
+{% endblock %}

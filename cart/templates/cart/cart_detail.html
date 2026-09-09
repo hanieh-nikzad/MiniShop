@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load cart_filters %}
+
+{% block content %}
+
+<h1>سبد خرید</h1>
+
+{% if products %}
+
+{% for product in products %}
+
+<h2>{{ product.name }}</h2>
+
+<p>
+    قیمت: {{ product.price }}
+</p>
+
+<p>
+    تعداد: {{ cart|get_item:product.id }}
+
+    <a href="{% url 'decrease_quantity' product.id %}">
+        -
+    </a>
+
+    <a href="{% url 'increase_quantity' product.id %}">
+        +
+    </a>
+</p>
+
+
+
+<a href="{% url 'remove_from_cart' product.id %}">
+    حذف از سبد خرید
+</a>
+
+<hr>
+
+{% endfor %}
+
+<h3>
+    مجموع کل: {{ total_price }}
+</h3>
+
+{% else %}
+
+<p>سبد خرید شما خالی است.</p>
+
+{% endif %}
+
+{% endblock %}

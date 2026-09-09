@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <title>MiniShop</title>
+    <link rel="stylesheet" href="{% static 'products/style.css' %}">
+</head>
+
+<body>
+<header>
+    <h1>MiniShop</h1>
+    <nav>
+    <a href="/">صفحه اصلی</a>
+    <a href="/products/">محصولات</a>
+    <a href="{% url 'cart_detail' %}">سبد خرید</a>
+    <a href="#">درباره ما</a>
+</nav>
+
+</header>
+
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

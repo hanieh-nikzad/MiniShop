@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if query %}
+
+    <h1>نتایج جستجو برای: {{ query }}</h1>
+
+{% else %}
+
+    <h1>همه محصولات</h1>
+
+{% endif %}
+
+
+<form method="get">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="جستجوی محصول..."
+        value="{{ query }}"
+    >
+
+    <button type="submit">
+        جستجو
+    </button>
+
+</form>
+
+<hr>
+
+
+{% for product in products %}
+
+    {% if product.image %}
+
+    <img
+        src="{{ product.image.url }}"
+        alt="{{ product.name }}"
+        width="200"
+        height="200"
+    >
+
+{% else %}
+
+    <img
+        src="{% static 'images/photo29601563916.jpg' %}"
+        alt="تصویر پیش‌فرض"
+        width="200"
+        height="200"
+    >
+
+{% endif %}
+
+    <h2>
+        <a href="{% url 'product_detail' product.id %}">
+            {{ product.name }}
+        </a>
+    </h2>
+
+    <p>قیمت: {{ product.price }}</p>
+
+    <p>
+        دسته‌بندی:
+        {% if product.category %}
+            <a href="{% url 'category_products' product.category.id %}">
+                {{ product.category.name }}
+            </a>
+        {% else %}
+            بدون دسته‌بندی
+        {% endif %}
+    </p>
+
+    <p>{{ product.description }}</p>
+
+{% empty %}
+
+    <p>محصولی پیدا نشد.</p>
+
+{% endfor %}
+
+{% endblock %}
